@@ -57,7 +57,9 @@ test$score <- pred.m1
 result <- test[,c("Application_ID", 'score', "DefFlag")]
 
 
-
+m2 <- glm(DefFlag ~ Monthly_Income + NotionalValue_t0 + Credit_amount + GEO_region + Age + NotionalOverdue_t0+
+            +DPD_lag1 + DPD_lag3 + Credit_purpose + DPD_lag2 +DPD_t0 + Job_type + Household_children + Number_of_installments+
+            Home_status + Car_status, data = df, family = binomial())
 
 
 
@@ -95,7 +97,7 @@ arf <- randomForest(DefFlag ~       GEO_region       +      Age        +        
                            +NotionalOverdue_t0   
                      
                     , data = na.omit(test), importance = TRUE,
-                    proximity = TRUE, do.trace = T, ntree = 1000, keep.forest = TRUE)
+                    proximity = TRUE, do.trace = T, ntree = 100, keep.forest = TRUE)
 
 varImpPlot(arf)
 importance(arf)
